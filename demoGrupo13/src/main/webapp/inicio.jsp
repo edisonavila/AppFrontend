@@ -15,7 +15,7 @@
 <div class="container mt-4 col-md-4">
   <div class="card col-sm-10" style="background-color: #b4a4a4;">
     <div class="card-body">
-      <form class="form-sign" method="post" action="./DemoServlet">
+      <form class="form-sign" method="get" action="./DemoServlet">
         <div class="form-group text-center">
          <h1>Login</h1>
          <img src="img/iconlogin.png" width="50" alt="40">
@@ -30,7 +30,7 @@
           <input type="password" name="txtpassword" class="form-control" style="background-color: #d4d4d4">
         </div>
         <div class="form-group">
-          <input type="submit" value="Ingresar" class= "btn btn-primary btn-b">
+          <input type="submit" name = "accion" value="Ingresar" class= "btn btn-primary btn-b">
         </div>
       </form>
     </div>
