@@ -13,7 +13,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="#">Huerta del Bosque</a>
+          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="#">Principal</a>
         <li class="nav-item">
           <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Usuarios&accion=Listar" target="myframe">Usuarios</a>
         </li>  
