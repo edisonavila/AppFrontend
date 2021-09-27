@@ -27,23 +27,23 @@
 						<div class="form-group">
 							<input type="hidden" name="menu" value="Usuarios"> 
 							<label>Cedula:</label>
-							<input type="text" name="txtcedula" class="form-control" value="${usuarioSeleccionado.getCedula_usuario()}">
+							<input type="text" name="txtcedula" class="form-control" value="${usuarioSeleccionado.getCedula_usuario()}" placeholder="Cédula">
 						</div>
 						<div class="form-group">
 							<label>Nombre:</label> 
-							<input type="text" name="txtnombre"	class="form-control" value="${usuarioSeleccionado.getNombre_usuario()}" >
+							<input type="text" name="txtnombre"	class="form-control" value="${usuarioSeleccionado.getNombre_usuario()}" placeholder="Nombres y apellidos">
 						</div>
 						<div class="form-group">
 							<label>Email:</label> 
-							<input type="text" name="txtemail" class="form-control" value="${usuarioSeleccionado.getEmail_usuario()}">
+							<input type="text" name="txtemail" class="form-control" value="${usuarioSeleccionado.getEmail_usuario()}" placeholder="Correo de usuario">
 						</div>
 						<div class="form-group">
 							<label>Usuario:</label> 
-							<input type="text" name="txtusuario" class="form-control" value="${usuarioSeleccionado.getUsuario()}">
+							<input type="text" name="txtusuario" class="form-control" value="${usuarioSeleccionado.getUsuario()}" placeholder="Nick de usuario">
 						</div>
 						<div class="form-group">
 							<label>Password:</label> 
-							<input type="password" name="txtpassword" class="form-control" value="${usuarioSeleccionado.getPassword()}">
+							<input type="password" name="txtpassword" class="form-control" value="${usuarioSeleccionado.getPassword()}" placeholder="Digite contraseña">
 						</div>
 
 						<input type="submit" class="btn btn-primary" name="accion" value="Agregar"> 
@@ -66,6 +66,7 @@
 			<tbody>
 				<%
 				ArrayList<Usuarios> lista = (ArrayList<Usuarios>) request.getAttribute("lista");
+				
 				for (Usuarios usuario : lista) {
 				%>
 				<tr>
@@ -75,8 +76,7 @@
 					<td><%=usuario.getUsuario()%></td>
 					<td><%=usuario.getPassword()%></td>
 					<td><a class="btn btn-warning" href="Controlador?menu=Usuarios&accion=Cargar&id=<%=usuario.getCedula_usuario()%>">Editar</a>
-						<a class="btn btn-danger"
-						href="Controlador?menu=Usuarios&accion=Eliminar&id=<%=usuario.getCedula_usuario()%>">Eliminar</a>
+						<a class="btn btn-danger" href="Controlador?menu=Usuarios&accion=Eliminar&id=<%=usuario.getCedula_usuario()%>">Eliminar</a>
 					</td>
 				</tr>
 				<%
