@@ -13,7 +13,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="http://localhost:8080/demoGrupo13/DemoServlet?txtusuario=admin&txtpassword=12345&accion=Ingresar">Principal</a>
+          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="http://localhost:8080/demoGrupo13/DemoServlet">Principal</a>
         <li class="nav-item">
           <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Usuarios&accion=Listar" target="myframe">Usuarios</a>
         </li>  
@@ -21,7 +21,7 @@
           <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Clientes&accion=Listar" target="myframe">Clientes</a>
         </li>
         <li class="nav-item">
-          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="#">Proveedores</a>
+          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Proveedores&accion=Listar" target="myframe">Proveedores</a>
         </li>          
         <li class="nav-item">
           <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="#">Productos</a>

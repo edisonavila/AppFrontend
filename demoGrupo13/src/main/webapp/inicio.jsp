@@ -10,7 +10,7 @@
         
 </head>
 <body background="img/frutas.png">
-<div align="center"><img src="img/logoH.png" width=247 height="180"></div>
+<div align="center"><img src="img/newlogo.png" width=500 height="180"></div>
 
 <div align="center" class="container mt-4 col-md-4">
   <div class="card col-sm-10" style="background-color: #71DC3C ;">
