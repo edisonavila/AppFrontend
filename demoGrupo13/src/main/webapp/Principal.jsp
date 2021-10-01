@@ -8,12 +8,16 @@
 <title>La Huerta del Bosque</title>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-info">
+	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #36903E ">
   <div class="container-fluid">
+  	<div>
+    	<img src="img/newlogo.png" alt="" width="200" height="54">
+      	<a href="Controlador?menu=Principal"></a>      
+      </div>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="http://localhost:8080/demoGrupo13/DemoServlet">Principal</a>
+          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Principal">Principal</a>
         <li class="nav-item">
           <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Usuarios&accion=Listar" target="myframe">Usuarios</a>
         </li>  
@@ -21,16 +25,16 @@
           <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Clientes&accion=Listar" target="myframe">Clientes</a>
         </li>
         <li class="nav-item">
-          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Proveedores&accion=Listar" target="myframe">Proveedores</a>
+          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Proveedores&accion=Listar"target="myframe">Proveedores</a>
         </li>          
         <li class="nav-item">
-          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="#">Productos</a>
+          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="#" target="myframe">Productos</a>
         </li>
         <li class="nav-item">
-          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="#">Ventas</a>
+          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="#" target="myframe">Ventas</a>
         </li>
         <li class="nav-item">
-          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="#">Reportes</a>
+          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="#" target="myframe">Reportes</a>
         </li>
       </ul>
     </div>
@@ -46,6 +50,7 @@
   </ul>
 </div>
 </nav>
+
 <div class="m-4" style="height:550px;">
 	<iframe style="height:100%; width:100%; border:none" name="myframe"></iframe>
 </div>
