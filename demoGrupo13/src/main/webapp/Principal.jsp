@@ -31,7 +31,7 @@
           <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="#" target="myframe">Productos</a>
         </li>
         <li class="nav-item">
-          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="#" target="myframe">Ventas</a>
+          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Ventas&accion=default&UsuarioActivo=${usuario.getCedula_usuario()}" target="myframe">Ventas</a>
         </li>
         <li class="nav-item">
           <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="#" target="myframe">Reportes</a>
