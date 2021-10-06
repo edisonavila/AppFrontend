@@ -1,6 +1,5 @@
 package co.edu.unbosqueCiclo3Demo;
 
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -16,10 +15,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-
 public class TestJSONProveedores {
+
 	private static URL url;
 	private static String sitio = "http://localhost:5000/";
+	
 	public static ArrayList<Proveedores> parsingProveedores(String json) throws ParseException {
 		JSONParser jsonParser = new JSONParser();
 		ArrayList<Proveedores> lista = new ArrayList<Proveedores>();

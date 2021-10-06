@@ -28,7 +28,7 @@
           <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Proveedores&accion=Listar"target="myframe">Proveedores</a>
         </li>          
         <li class="nav-item">
-          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="#" target="myframe">Productos</a>
+          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Productos&accion=Listar" target="myframe">Productos</a>
         </li>
         <li class="nav-item">
           <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="#" target="myframe">Ventas</a>

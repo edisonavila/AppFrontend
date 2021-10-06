@@ -13,7 +13,7 @@
 <div align="center"><img src="img/newlogo.png" class="img-fluid" width=500 height="180"></div>
 
 <div align="center" class="container mt-4 col-md-4">
-  <div class="card col-sm-10" style="background-color: #71DC3C  ;">
+  <div class="card col-sm-10" style="background-color: #71DC3C;">
     <div class="card-body">
       <form class="form-sign" method="get" action="./DemoServlet">
         <div class="form-group text-center">

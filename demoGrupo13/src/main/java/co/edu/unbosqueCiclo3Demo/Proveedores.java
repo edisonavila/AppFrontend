@@ -10,6 +10,7 @@ public class Proveedores {
 	
 	
 	
+	
 	public String getNit_proveedor() {
 		return nit_proveedor;
 	}
