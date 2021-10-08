@@ -516,7 +516,7 @@ public class Controlador extends HttpServlet {
 				iva=Double.parseDouble(request.getParameter("ivaproducto"));
 				//
 				subtotal=(precio*cantidad);
-				valor_iva=(subtotal*iva)/100;
+				valor_iva=Math.round((subtotal*iva)/100);
 				
 				
 				//
