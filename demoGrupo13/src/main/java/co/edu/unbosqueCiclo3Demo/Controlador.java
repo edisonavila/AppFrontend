@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,7 +17,63 @@ import javax.servlet.http.HttpServletResponse;
 //@WebServlet(name = "Controlador", urlPatterns = {"/Controlador"})
 public class Controlador extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
+	//*************************Variables Generales*************************
+	
+		double subtotal=0,totalapagar=0;
+		double iva=0,subtotal_iva=0,valor_iva=0,acusubtotal=0;
+		long codProducto=0,precio=0;
+		long numfactura=0;
+		int cantidad=0,item=0;
+		
+		String descripcion,cedulaCliente;
+		
+		List<Detalle_ventas>listaventas = new ArrayList<>();
+		Usuarios usuarios = new Usuarios();
+		Detalle_ventas detalle = new Detalle_ventas();
+		//*********************************************************************
+		//*************************Metodos Locales Controlador*************************
+		
+		public void buscarCliente(String id, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{		
+			try {
+				ArrayList<Clientes> listac = ClienteJSON.getJSON();
+				for(Clientes clientes: listac) {				
+					if(clientes.getCedula_cliente().equals(id)) {
+						request.setAttribute("clienteSeleccionado", clientes);					
+					}
+				}
+					
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		}
+		public void buscarProducto(String id, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+			try {
+				ArrayList<Productos> listap = TestJSONProductos.getJSON();
+				for(Productos productos: listap) {
+					if(productos.getCodigo_producto().equals(id)) {
+						request.setAttribute("productoSeleccionado", productos);
+					}
+				}
+					
+			} catch (Exception e) {
+				 // TODO: handle exception
+				e.printStackTrace();
+			}
+		}
+		public void mostrarNumFactura(String numFact, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+			if(numFact==null) {
+				numFact="1";
+				numfactura=Integer.parseInt(numFact);				
+			}else {
+				numfactura=Integer.parseInt(numFact)+1;
+			}
+			request.setAttribute("numerofactura", numfactura);
+		}
+		
+		
+		//*****************************************************************************
 	public Controlador() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -32,6 +89,7 @@ public class Controlador extends HttpServlet {
 
 		String menu = request.getParameter("menu");
 		String accion = request.getParameter("accion");
+		
 
 		switch (menu) {
 		case "Principal":
@@ -225,7 +283,7 @@ public class Controlador extends HttpServlet {
 				proveedor.setNombre_proveedor(request.getParameter("txtnombre"));
 				proveedor.setTelefono_proveedor(request.getParameter("txttelefono"));
 				proveedor.setDireccion_proveedor(request.getParameter("txtdireccion"));
-				System.out.println("Error: antes de entrar");
+				System.out.println("Error: antes de entrar" );
 				int respuesta = 0;
 				try {
 					respuesta = TestJSONProveedores.postJSON(proveedor);
@@ -246,7 +304,7 @@ public class Controlador extends HttpServlet {
 				proveedor.setCiudad_proveedor(request.getParameter("txtciudad"));
 				proveedor.setNombre_proveedor(request.getParameter("txtnombre"));
 				proveedor.setTelefono_proveedor(request.getParameter("txttelefono"));
-				proveedor.setDireccion_proveedor(request.getParameter("txtdireccion"));
+				proveedor.setDireccion_proveedor(request.getParameter("txtdireccion"));				
 				int respuesta = 0;
 				try {
 					respuesta = TestJSONProveedores.putJSON(proveedor, Long.parseLong(proveedor.getNit_proveedor()));
@@ -254,7 +312,7 @@ public class Controlador extends HttpServlet {
 
 					if (respuesta == 200) {
 						request.getRequestDispatcher("Controlador?menu=Proveedores&accion=Listar").forward(request,
-								response);
+								response);						
 					} else {
 						write.println("Error: " + respuesta);
 					}
@@ -385,8 +443,107 @@ public class Controlador extends HttpServlet {
 			request.getRequestDispatcher("/Productos.jsp").forward(request, response);
 			break;
 		case "Ventas":
+			//***************Cedula Usuario Activo****************
+			
+			String cedula_usuario_activo=request.getParameter("UsuarioActivo");
+			usuarios.setCedula_usuario(cedula_usuario_activo);
+			request.setAttribute("usuarioSeleccionado", usuarios);
+					
+					
+					
+			//****************************************************
+			
+			//****************EnviarCedulaUsuario*****************
+			
+			request.setAttribute("usuarioSeleccionado",usuarios);
+			request.setAttribute("numerofactura", numfactura);
+			
+			//****************************************************
+			
+			if(accion.equals("BuscarCliente")) {
+				String id=request.getParameter("cedulaCliente");
+				this.buscarCliente(id, request, response);				
+			}else if(accion.equals("BuscarProducto")){
+				String id=request.getParameter("codigoproducto");				
+				this.buscarProducto(id, request, response);
+				//*********ClienteNoDelete**********
+				String idC=request.getParameter("cedulaCliente");
+				this.buscarCliente(idC, request, response);
+				//**********************************
+			}else if(accion.equals("AgregarProducto")) {
+				String id=request.getParameter("cedulaCliente");
+				this.buscarCliente(id, request, response);
+				//************************************************
+				Detalle_ventas detalle_ventas = new Detalle_ventas();
+				item++;
+				totalapagar=0;
+				//
+				codProducto=Integer.parseInt(request.getParameter("codigoproducto"));
+				descripcion=request.getParameter("nombreproducto");
+				precio=Long.parseLong(request.getParameter("precioproducto"));
+				cantidad=Integer.parseInt(request.getParameter("cantidadproducto"));
+				iva=Double.parseDouble(request.getParameter("ivaproducto"));
+				//
+				subtotal=(precio*cantidad);
+				valor_iva=(subtotal*iva)/100;
+				//
+				detalle_ventas.setCodigo_detalle_venta(item);
+				detalle_ventas.setCodigo_producto(codProducto);
+				detalle_ventas.setDescripcion_producto(descripcion);
+				detalle_ventas.setCantidad_producto(cantidad);
+				detalle_ventas.setPrecio_producto(precio);
+				detalle_ventas.setCodigo_venta(numfactura);
+				detalle_ventas.setValor_iva(iva);
+				detalle_ventas.setValor_venta(subtotal);				
+				listaventas.add(detalle_ventas);
+				
+				for(int i=0; i < listaventas.size(); i++) {
+					acusubtotal +=listaventas.get(i).getValor_venta();
+					subtotal_iva +=listaventas.get(i).getValor_iva();
+				}
+				totalapagar=acusubtotal+subtotal_iva;
+				detalle_ventas.setValor_iva(totalapagar);
+				
+				request.setAttribute("listaventas", listaventas);
+				request.setAttribute("subtotal", acusubtotal);
+				request.setAttribute("subtotaliva", subtotal_iva);
+				request.setAttribute("total", totalapagar);
+			}else if(accion.equals("GenerarVenta")){
+				String numFact = request.getParameter("numerofactura");
+				cedulaCliente = request.getParameter("cedulaCliente");
+				
+				Ventas ventas = new Ventas();
+				ventas.setCodigo_venta(Long.parseLong(numFact));
+				ventas.setCedula_cliente(Long.parseLong(cedulaCliente));
+				ventas.setCedula_usuario(Long.parseLong(usuarios.getCedula_usuario()));
+				ventas.setIva_venta(subtotal_iva);
+				ventas.setValor_venta(acusubtotal);
+				ventas.setTotal_venta(totalapagar);
+				
+				
+				int respuesta=0;
+				try {
+					respuesta = TestJSONVentas.postJSON(ventas);
+					PrintWriter write = response.getWriter();
+					
+					if(respuesta==200) {
+						System.out.println("Guardado Exitoso");
+					}else {
+						write.println("error ventas:" + respuesta);
+					}
+					write.close();
+				} catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+			}else {
+				//SeMuestraLaFactura
+				String factura = null;
+				this.mostrarNumFactura(factura, request, response);
+				
+			}
 			request.getRequestDispatcher("/Ventas.jsp").forward(request, response);
-			break;
+			break;		
 		}
 
 	}

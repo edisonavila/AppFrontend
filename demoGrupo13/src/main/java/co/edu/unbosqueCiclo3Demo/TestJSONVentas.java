@@ -42,8 +42,8 @@ public class TestJSONVentas {
 				"\",\"cedula_usuario\": \"" + String.valueOf(venta.getCedula_usuario()) + 
 				"\",\"iva_venta\":\"" + String.valueOf(venta.getIva_venta()) + 
 				"\",\"total_venta\":\"" + String.valueOf(venta.getTotal_venta()) + 
-				"\",\"valor_venta\":\"" + String.valueOf(venta.getValor_venta()) + "\"}";
-		
+				"\",\"valor_venta\":\"" + String.valueOf(venta.getValor_venta()) + "\"}";					
+				
 		byte[] out = data.getBytes(StandardCharsets.UTF_8);
 		OutputStream stream = http.getOutputStream();
 		stream.write(out);
