@@ -72,6 +72,35 @@ public class Controlador extends HttpServlet {
 			request.setAttribute("numerofactura", numfactura);
 		}
 		
+		public void grabarDetalle_Ventas(Long numFact, HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+			for(int i=0; i < listaventas.size(); i++) {
+				Detalle_ventas detalle_ventas = new Detalle_ventas();
+				detalle_ventas.setCodigo_detalle_venta(i+1);
+				detalle_ventas.setCodigo_venta(numFact);
+				detalle_ventas.setCodigo_producto(listaventas.get(i).getCodigo_producto());
+				detalle_ventas.setCantidad_producto(listaventas.get(i).getCantidad_producto());
+				detalle_ventas.setValor_venta(listaventas.get(i).getValor_venta());
+				detalle_ventas.setValor_total(listaventas.get(i).getValor_total());
+				detalle_ventas.setValor_iva(listaventas.get(i).getValor_iva());
+				
+				int respuesta=0;
+				try {
+					respuesta = TestJSONDetalle_ventas.postJSON(detalle_ventas);
+					PrintWriter write = response.getWriter();
+					if(respuesta == 200) {
+						System.out.println("Registro grabado en posicion: " + i);
+						request.getRequestDispatcher("Controlador?menu=Ventas&accion=default").forward(request, response);
+					}else {
+						System.out.println("Error de grabado tipo: " + respuesta);
+					}
+					write.close();
+				} catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+				
+			}
+		}
 		
 		//*****************************************************************************
 	public Controlador() {
@@ -477,6 +506,8 @@ public class Controlador extends HttpServlet {
 				Detalle_ventas detalle_ventas = new Detalle_ventas();
 				item++;
 				totalapagar=0;
+				acusubtotal=0;
+				subtotal_iva=0;
 				//
 				codProducto=Integer.parseInt(request.getParameter("codigoproducto"));
 				descripcion=request.getParameter("nombreproducto");
@@ -486,6 +517,8 @@ public class Controlador extends HttpServlet {
 				//
 				subtotal=(precio*cantidad);
 				valor_iva=(subtotal*iva)/100;
+				
+				
 				//
 				detalle_ventas.setCodigo_detalle_venta(item);
 				detalle_ventas.setCodigo_producto(codProducto);
@@ -493,21 +526,26 @@ public class Controlador extends HttpServlet {
 				detalle_ventas.setCantidad_producto(cantidad);
 				detalle_ventas.setPrecio_producto(precio);
 				detalle_ventas.setCodigo_venta(numfactura);
-				detalle_ventas.setValor_iva(iva);
+				detalle_ventas.setValor_iva(valor_iva);
 				detalle_ventas.setValor_venta(subtotal);				
 				listaventas.add(detalle_ventas);
+										
+				System.out.println(detalle_ventas.getValor_iva());
+				System.out.println(detalle_ventas.getValor_venta());
 				
 				for(int i=0; i < listaventas.size(); i++) {
 					acusubtotal +=listaventas.get(i).getValor_venta();
 					subtotal_iva +=listaventas.get(i).getValor_iva();
 				}
 				totalapagar=acusubtotal+subtotal_iva;
-				detalle_ventas.setValor_iva(totalapagar);
+				detalle_ventas.setValor_total(totalapagar);
+				detalle_ventas.setValor_iva(subtotal_iva);
 				
 				request.setAttribute("listaventas", listaventas);
 				request.setAttribute("subtotal", acusubtotal);
 				request.setAttribute("subtotaliva", subtotal_iva);
 				request.setAttribute("total", totalapagar);
+				
 			}else if(accion.equals("GenerarVenta")){
 				String numFact = request.getParameter("numerofactura");
 				cedulaCliente = request.getParameter("cedulaCliente");
@@ -528,6 +566,7 @@ public class Controlador extends HttpServlet {
 					
 					if(respuesta==200) {
 						System.out.println("Guardado Exitoso");
+						this.grabarDetalle_Ventas(ventas.getCodigo_venta(), request, response);
 					}else {
 						write.println("error ventas:" + respuesta);
 					}
@@ -536,9 +575,16 @@ public class Controlador extends HttpServlet {
 					// TODO: handle exception
 					e.printStackTrace();
 				}
+				
+				listaventas.clear();
+				item=0;
+				totalapagar=0;
+				acusubtotal=0;
+				subtotal_iva=0;
+				
 			}else {
 				//SeMuestraLaFactura
-				String factura = null;
+				String factura = request.getParameter("numerofactura");
 				this.mostrarNumFactura(factura, request, response);
 				
 			}
