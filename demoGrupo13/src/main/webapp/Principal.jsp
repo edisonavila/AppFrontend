@@ -25,19 +25,19 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Usuarios&accion=Listar" target="myframe">Usuarios</a>
+          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Usuarios&accion=Listar" target="">Usuarios</a>
         </li>  
         <li class="nav-item">
-          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Clientes&accion=Listar" target="myframe">Clientes</a>
+          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Clientes&accion=Listar" target="">Clientes</a>
         </li>
         <li class="nav-item">
-          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Proveedores&accion=Listar"target="myframe">Proveedores</a>
+          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Proveedores&accion=Listar"target="">Proveedores</a>
         </li>          
         <li class="nav-item">
-          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Productos&accion=Listar" target="myframe">Productos</a>
+          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Productos&accion=Listar" target="">Productos</a>
         </li>
         <li class="nav-item">
-          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="#" target="myframe">Ventas</a>
+          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Ventas&accion=default&UsuarioActivo=${usuario.getCedula_usuario()}" target="">Ventas</a>
         </li>
         <li class="nav-item">
           <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="#" target="myframe">Reportes</a>
@@ -56,6 +56,7 @@
   </ul>
 </div>
 </nav>
+
 <div id= "ofertas">
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
@@ -114,7 +115,7 @@
         <span></span>
         <span></span>
       </div>
-      <a href="#">Añadir al carrito</a>
+      <a href="Controlador?menu=Productos&accion=Listar">Añadir al carrito</a>
     </div>
   </div>
 </div>
@@ -135,7 +136,7 @@
         <span></span>
         <span></span>
       </div>
-      <a href="#">Añadir al carrito</a>
+      <a href="Controlador?menu=Productos&accion=Listar">Añadir al carrito</a>
       
     </div>
   </div>
@@ -157,7 +158,7 @@
         <span></span>
         <span></span>
       </div>
-      <a href="#">Añadir al carrito</a>
+      <a href="Controlador?menu=Productos&accion=Listar">Añadir al carrito</a>
     </div>
   </div>
 </div>
@@ -183,7 +184,7 @@
         <span></span>
         <span></span>
       </div>
-      <a href="#">Añadir al carrito</a>
+      <a href="Controlador?menu=Productos&accion=Listar">Añadir al carrito</a>
     </div>
   </div>
 </div>
@@ -205,7 +206,7 @@
         <span></span>
         <span></span>
       </div>
-      <a href="#">Añadir al carrito</a>
+      <a href="Controlador?menu=Productos&accion=Listar">Añadir al carrito</a>
       
     </div>
   </div>
@@ -227,7 +228,7 @@
         <span></span>
         <span></span>
       </div>
-      <a href="#">Añadir al carrito</a>
+      <a href="Controlador?menu=Productos&accion=Listar">Añadir al carrito</a>
     </div>
   </div>
 </div>
@@ -253,7 +254,7 @@
         <span></span>
         <span></span>
       </div>
-      <a href="#">Añadir al carrito</a>
+      <a href="Controlador?menu=Productos&accion=Listar">Añadir al carrito</a>
     </div>
   </div>
 </div>
@@ -274,7 +275,7 @@
         <span></span>
         <span></span>
       </div>
-      <a href="#">Añadir al carrito</a>
+      <a href="Controlador?menu=Productos&accion=Listar">Añadir al carrito</a>
     </div>
   </div>
 </div>
@@ -296,7 +297,7 @@
         <span></span>
         <span></span>
       </div>
-      <a href="#">Añadir al carrito</a>
+      <a href="Controlador?menu=Productos&accion=Listar">Añadir al carrito</a>
       
     </div>
   </div>
@@ -328,7 +329,7 @@
         <span></span>
         <span></span>
       </div>
-      <a href="#">Añadir al carrito</a>
+      <a href="Controlador?menu=Productos&accion=Listar">Añadir al carrito</a>
     </div>
   </div>
 </div>
@@ -349,7 +350,7 @@
         <span></span>
         <span></span>
       </div>
-      <a href="#">Añadir al carrito</a>
+      <a href="Controlador?menu=Productos&accion=Listar">Añadir al carrito</a>
       
     </div>
   </div>
@@ -371,7 +372,7 @@
         <span></span>
         <span></span>
       </div>
-      <a href="#">Añadir al carrito</a>
+      <a href="Controlador?menu=Productos&accion=Listar">Añadir al carrito</a>
     </div>
   </div>
 </div>
@@ -397,7 +398,7 @@
         <span></span>
         <span></span>
       </div>
-      <a href="#">Añadir al carrito</a>
+      <a href="Controlador?menu=Productos&accion=Listar">Añadir al carrito</a>
     </div>
   </div>
 </div>
@@ -419,7 +420,7 @@
         <span></span>
         <span></span>
       </div>
-      <a href="#">Añadir al carrito</a>
+      <a href="Controlador?menu=Productos&accion=Listar">Añadir al carrito</a>
       
     </div>
   </div>
@@ -441,7 +442,7 @@
         <span></span>
         <span></span>
       </div>
-      <a href="#">Añadir al carrito</a>
+      <a href="Controlador?menu=Productos&accion=Listar">Añadir al carrito</a>
     </div>
   </div>
 </div>
@@ -467,7 +468,7 @@
         <span></span>
         <span></span>
       </div>
-      <a href="#">Añadir al carrito</a>
+      <a href="Controlador?menu=Productos&accion=Listar">Añadir al carrito</a>
     </div>
   </div>
 </div>
@@ -488,7 +489,7 @@
         <span></span>
         <span></span>
       </div>
-      <a href="#">Añadir al carrito</a>
+      <a href="Controlador?menu=Productos&accion=Listar">Añadir al carrito</a>
     </div>
   </div>
 </div>
@@ -510,7 +511,7 @@
         <span></span>
         <span></span>
       </div>
-      <a href="#">Añadir al carrito</a>
+      <a href="Controlador?menu=Productos&accion=Listar">Añadir al carrito</a>
       
     </div>
   </div>
