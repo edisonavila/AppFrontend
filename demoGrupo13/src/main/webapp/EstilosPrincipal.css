@@ -1,0 +1,31 @@
+@charset "ISO-8859-1";
+body{
+	background: url(https://img.freepik.com/foto-gratis/viejo-fondo-textura-madera-vintage_55716-1138.jpg?size=626&ext=jpg);
+	background-size: cover;
+ }
+ #contenido{
+ font-family: sans-serif, Arial;
+ }
+ .banner{
+ height: 215px;
+ width: 100%;
+ }
+.img2 {
+  width: 100%;
+}
+
+#ofertas{
+	background-color: transparent ;
+margin-top: 10px;
+margin-right: 150px;
+margin-bottom: 10px;
+margin-left: 150px;
+}
+
+#precios{
+	background-color: #296B2F ;
+margin-top: 10px;
+margin-right: 50px;
+margin-bottom: 0px;
+margin-left: 50px;
+}
