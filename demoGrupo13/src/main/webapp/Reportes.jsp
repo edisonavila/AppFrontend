@@ -51,7 +51,7 @@
     ${usuario.getNombre_usuario()}
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">      
-    <li><a class="dropdown-item" href="http://localhost:8080/demoGrupo13/inicio.jsp">CerrarSesion</a></li>
+    <li><a class="dropdown-item" href="http://localhost:8080/Huerta_del_Bosque/inicio.jsp">CerrarSesion</a></li>
   </ul>
 </div>
 </nav>
