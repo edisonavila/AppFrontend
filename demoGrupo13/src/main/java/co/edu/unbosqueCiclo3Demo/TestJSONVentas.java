@@ -18,7 +18,8 @@ import org.json.simple.parser.ParseException;
 public class TestJSONVentas {
 	
 	private static URL url;
-	private static String sitio = "http://localhost:5000/";
+	//private static String sitio = "http://localhost:5000/";
+	private static String sitio ="http://localhost:8080/backHuertadelBosque-0.0.1-SNAPSHOT/";
 	
 	public static ArrayList<Ventas> parsingVentas(String json) throws ParseException {
 		JSONParser jsonParser = new JSONParser();
@@ -38,7 +39,7 @@ public class TestJSONVentas {
 		}
 		return lista;
 	}
-
+	
 	public static ArrayList<Ventas> getJSON() throws IOException, ParseException {
 
 		url = new URL(sitio + "ventas/listar");
@@ -61,8 +62,6 @@ public class TestJSONVentas {
 		return lista;
 	}
 	
-
-
 	public static int postJSON(Ventas venta) throws IOException {
 		
 		
@@ -95,6 +94,40 @@ public class TestJSONVentas {
 		http.disconnect();
 		return respuesta;
 	}
-
+	
+	public static Long parsingConsecutivo(String json) throws IOException, ParseException {
+		Long cod=null;
+		JSONParser jsonParser = new JSONParser();
+		JSONObject innerObj = (JSONObject) jsonParser.parse(json);
+			 
+		if (innerObj!=null && !innerObj.isEmpty()) {
+		    cod=Long.parseLong(innerObj.get("id").toString());
+		}
+		return cod;
+	}
+	
+	public static Long getConsecutivo() throws IOException, ParseException {
+		Long cod=null;
+		
+		url = new URL(sitio+"ventas/consecutivo");
+		HttpURLConnection http;
+		http = (HttpURLConnection)url.openConnection();
+		
+		http.setRequestMethod("GET");
+		http.setRequestProperty("Accept", "application/json");
+		
+		InputStream respuesta = http.getInputStream();
+		byte[] inp = respuesta.readAllBytes();
+		String json = "";
+		
+		for (int i = 0; i<inp.length ; i++) {
+			   json += (char)inp[i];
+		}
+			
+		cod = parsingConsecutivo(json);
+		http.disconnect();
+		return cod;
+		
+	}
 
 }

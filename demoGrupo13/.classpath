@@ -13,12 +13,12 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/cajas/Downloads/jstl-1.2.jar">
+	<classpathentry kind="lib" path="C:/Users/cajas/Documents/jstl-1.2.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/cajas/Documents/DB MinTIC/json-simple-1.1.1.jar">
+	<classpathentry kind="lib" path="C:/Users/cajas/Downloads/json-simple-1.1.1.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>

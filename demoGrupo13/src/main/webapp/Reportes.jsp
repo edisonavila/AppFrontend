@@ -41,19 +41,17 @@
           <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Ventas&accion=default&UsuarioActivo=${usuario.getCedula_usuario()}" target="">Ventas</a>
         </li>
         <li class="nav-item">
-          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="#" target="">Reportes</a>
+          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Reportes&accion=default" target="">Reportes</a>
         </li>
       </ul>
     </div>
   </div>
   <div class="dropdown">
   <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    UserName
+    ${usuario.getNombre_usuario()}
   </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="#">NombreUsuario</a></li>
-    <li><a class="dropdown-item" href="#">Email</a></li>
-    <li><a class="dropdown-item" href="#">CerrarSesion</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">      
+    <li><a class="dropdown-item" href="http://localhost:8080/demoGrupo13/inicio.jsp">CerrarSesion</a></li>
   </ul>
 </div>
 </nav>

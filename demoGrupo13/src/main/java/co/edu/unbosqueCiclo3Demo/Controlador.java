@@ -29,9 +29,10 @@ public class Controlador extends HttpServlet {
 		String descripcion,cedulaCliente;
 		
 		List<Detalle_ventas>listaventas = new ArrayList<>();
-		Usuarios usuarios = new Usuarios();
+		Usuarios usuarios1 = new Usuarios();
 		Detalle_ventas detalle = new Detalle_ventas();
 		//*********************************************************************
+		
 		//*************************Metodos Locales Controlador*************************
 		
 		public void buscarCliente(String id, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{		
@@ -73,17 +74,23 @@ public class Controlador extends HttpServlet {
 		}
 		
 		public void grabarDetalle_Ventas(Long numFact, HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+			
 			for(int i=0; i < listaventas.size(); i++) {
+				
 				Detalle_ventas detalle_ventas = new Detalle_ventas();
+				
 				detalle_ventas.setCodigo_detalle_venta(i+1);
-				detalle_ventas.setCodigo_venta(numFact);
-				detalle_ventas.setCodigo_producto(listaventas.get(i).getCodigo_producto());
 				detalle_ventas.setCantidad_producto(listaventas.get(i).getCantidad_producto());
+				detalle_ventas.setCodigo_producto(listaventas.get(i).getCodigo_producto());
+				detalle_ventas.setCodigo_venta(numFact);				
+				detalle_ventas.setValor_iva(listaventas.get(i).getValor_iva());	
+				detalle_ventas.setValor_total(listaventas.get(i).getValor_total());				
 				detalle_ventas.setValor_venta(listaventas.get(i).getValor_venta());
-				detalle_ventas.setValor_total(listaventas.get(i).getValor_total());
-				detalle_ventas.setValor_iva(listaventas.get(i).getValor_iva());
 				
 				int respuesta=0;
+				
+				System.out.println("Error antes de grabar detalle");
+				
 				try {
 					respuesta = TestJSONDetalle_ventas.postJSON(detalle_ventas);
 					PrintWriter write = response.getWriter();
@@ -91,7 +98,7 @@ public class Controlador extends HttpServlet {
 						System.out.println("Registro grabado en posicion: " + i);
 						request.getRequestDispatcher("Controlador?menu=Ventas&accion=default").forward(request, response);
 					}else {
-						System.out.println("Error de grabado tipo: " + respuesta);
+						System.out.println("Error de grabado tipo: " + respuesta + i);
 					}
 					write.close();
 				} catch (Exception e) {
@@ -101,6 +108,7 @@ public class Controlador extends HttpServlet {
 				
 			}
 		}
+		
 		
 		//*****************************************************************************
 	public Controlador() {
@@ -115,7 +123,11 @@ public class Controlador extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
+		//*****************************************
+		String cedula_usuario_activo=request.getParameter("UsuarioActivo");
+		usuarios1.setCedula_usuario(cedula_usuario_activo);
+		request.setAttribute("usuarioSeleccionado1",usuarios1);
+		//*****************************************
 		String menu = request.getParameter("menu");
 		String accion = request.getParameter("accion");
 		
@@ -124,7 +136,7 @@ public class Controlador extends HttpServlet {
 		case "Principal":
 			request.getRequestDispatcher("/Principal.jsp").forward(request, response);
 			break;
-		case "Usuarios":
+		case "Usuarios":			
 			if (accion.equals("Listar")) {
 				try {
 					ArrayList<Usuarios> lista = TestJSON.getJSON();
@@ -179,8 +191,7 @@ public class Controlador extends HttpServlet {
 			} else if (accion.equals("Cargar")) {
 				String id = request.getParameter("id");
 				try {
-					ArrayList<Usuarios> lista1 = TestJSON.getJSON();
-					// System.out.println("Parametro: " + id);
+					ArrayList<Usuarios> lista1 = TestJSON.getJSON();					 
 					for (Usuarios usuarios : lista1) {
 						if (usuarios.getCedula_usuario().equals(id)) {
 							request.setAttribute("usuarioSeleccionado", usuarios);
@@ -212,6 +223,8 @@ public class Controlador extends HttpServlet {
 			request.getRequestDispatcher("/Usuarios.jsp").forward(request, response);
 			break;
 		case "Clientes":
+			request.setAttribute("usuarioSeleccionado",usuarios1);
+			
 			if (accion.equals("Listar")) {
 				try {
 					ArrayList<Clientes> lista = ClienteJSON.getJSON();
@@ -298,6 +311,8 @@ public class Controlador extends HttpServlet {
 			break;
 
 		case "Proveedores":
+			request.setAttribute("usuarioSeleccionado",usuarios1);
+			
 			if (accion.equals("Listar")) {
 				try {
 					ArrayList<Proveedores> lista = TestJSONProveedores.getJSON();
@@ -319,7 +334,7 @@ public class Controlador extends HttpServlet {
 					if (respuesta == 200) {
 						request.getRequestDispatcher("Controlador?menu=Proveedores&accion=Listar").forward(request,
 								response);
-						System.out.println("Error: entro");
+						//System.out.println("Error: entro");
 					} else {
 						System.out.println("Error: " + respuesta);
 					}
@@ -383,6 +398,8 @@ public class Controlador extends HttpServlet {
 			request.getRequestDispatcher("/Proveedores.jsp").forward(request, response);
 			break;
 		case "Productos":
+			request.setAttribute("usuarioSeleccionado",usuarios1);
+			
 			if (accion.equals("Listar")) {
 				try {
 					ArrayList<Productos> lista = TestJSONProductos.getJSON();
@@ -471,20 +488,11 @@ public class Controlador extends HttpServlet {
 
 			request.getRequestDispatcher("/Productos.jsp").forward(request, response);
 			break;
-		case "Ventas":
-			//***************Cedula Usuario Activo****************
-			
-			String cedula_usuario_activo=request.getParameter("UsuarioActivo");
-			usuarios.setCedula_usuario(cedula_usuario_activo);
-			request.setAttribute("usuarioSeleccionado", usuarios);
-					
-					
-					
-			//****************************************************
+		case "Ventas":								
 			
 			//****************EnviarCedulaUsuario*****************
 			
-			request.setAttribute("usuarioSeleccionado",usuarios);
+			request.setAttribute("usuarioSeleccionado1",usuarios1);
 			request.setAttribute("numerofactura", numfactura);
 			
 			//****************************************************
@@ -529,9 +537,7 @@ public class Controlador extends HttpServlet {
 				detalle_ventas.setValor_iva(valor_iva);
 				detalle_ventas.setValor_venta(subtotal);				
 				listaventas.add(detalle_ventas);
-										
-				System.out.println(detalle_ventas.getValor_iva());
-				System.out.println(detalle_ventas.getValor_venta());
+														
 				
 				for(int i=0; i < listaventas.size(); i++) {
 					acusubtotal +=listaventas.get(i).getValor_venta();
@@ -550,20 +556,24 @@ public class Controlador extends HttpServlet {
 				String numFact = request.getParameter("numerofactura");
 				cedulaCliente = request.getParameter("cedulaCliente");
 				
+				System.out.println("Check antes de Ventas");
+				
 				Ventas ventas = new Ventas();
 				ventas.setCodigo_venta(Long.parseLong(numFact));
 				ventas.setCedula_cliente(Long.parseLong(cedulaCliente));
-				ventas.setCedula_usuario(Long.parseLong(usuarios.getCedula_usuario()));
+				ventas.setCedula_usuario(Long.parseLong(usuarios1.getCedula_usuario()));
 				ventas.setIva_venta(subtotal_iva);
 				ventas.setValor_venta(acusubtotal);
 				ventas.setTotal_venta(totalapagar);
 				
-				
+				System.out.println(ventas.getCedula_usuario());
+				System.out.println(ventas.getCodigo_venta());
+				System.out.println(ventas.getValor_venta());
 				int respuesta=0;
 				try {
 					respuesta = TestJSONVentas.postJSON(ventas);
 					PrintWriter write = response.getWriter();
-					
+					System.out.println(respuesta);
 					if(respuesta==200) {
 						System.out.println("Guardado Exitoso");
 						this.grabarDetalle_Ventas(ventas.getCodigo_venta(), request, response);
@@ -583,10 +593,14 @@ public class Controlador extends HttpServlet {
 				subtotal_iva=0;
 				
 			}else {
-				//SeMuestraLaFactura
-				String factura = request.getParameter("numerofactura");
-				this.mostrarNumFactura(factura, request, response);
-				
+				try {
+					numfactura=TestJSONVentas.getConsecutivo();
+					System.out.println("factura numero: "+numfactura);					
+					request.setAttribute("numerofactura", numfactura);
+				} catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
 			}
 			request.getRequestDispatcher("/Ventas.jsp").forward(request, response);
 			break;

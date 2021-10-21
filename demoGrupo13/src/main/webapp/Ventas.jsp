@@ -37,19 +37,17 @@
           <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Ventas&accion=default&UsuarioActivo=${usuario.getCedula_usuario()}" target="">Ventas</a>
         </li>
         <li class="nav-item">
-          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="#" target="myframe">Reportes</a>
+          <a style="margin-left:10px; border:none"class="btn btn-outline-light" href="Controlador?menu=Reportes&accion=default" target="myframe">Reportes</a>
         </li>
       </ul>
     </div>
   </div>
   <div class="dropdown">
   <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    UserName
+    ${usuario.getNombre_usuario()}
   </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="#">NombreUsuario</a></li>
-    <li><a class="dropdown-item" href="#">Email</a></li>
-    <li><a class="dropdown-item" href="#">CerrarSesion</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">      
+    <li><a class="dropdown-item" href="http://localhost:8080/demoGrupo13/inicio.jsp">CerrarSesion</a></li>
   </ul>
 </div>
 </nav>
@@ -158,7 +156,7 @@
 				</div>
 				<div class="card-footer d-flex">
 					<div class="col-md-8">
-						<a class="btn btn-success" onclick="print()" href="Controlador?menu=Ventas&accion=GenerarVenta&cedulaCliente=${clienteSeleccionado.getCedula_cliente()}&UsuarioActivo=${usuarioSeleccionado.getCedula_usuario()}&numerofactura=${numerofactura}">Generar Venta</a>
+						<a class="btn btn-success" onclick="print()" href="Controlador?menu=Ventas&accion=GenerarVenta&cedulaCliente=${clienteSeleccionado.getCedula_cliente()}&UsuarioActivo=${usuarioSeleccionado1.getCedula_usuario()}&numerofactura=${numerofactura}">Generar Venta</a>
 						<a class="btn btn-danger" href="Controlador?menu=Ventas&accion=NuevaVenta">Nueva Venta</a>
 					</div>
 				</div>
